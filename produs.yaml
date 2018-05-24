@@ -1,0 +1,239 @@
+swagger: '2.0'
+info:
+  description: ' o documentatie privind apalearea unor metode REST pentru un  site Food Market'
+  version: 1.0.0
+  title: Imi e foame
+  termsOfService: 'http://imiefoame.ro/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: imiefoame.ro
+tags:
+  - name: Produse
+    description: 'interogare prin XAMPP din DB MariaDB '
+    externalDocs:
+      description: Produse din DB
+      url: 'http://myslim/app/foodmarket/products'
+schemes:
+  - http
+paths:
+  /addProdus:
+    post:
+      tags:
+        - /addProdus
+      summary: Add a new producton
+      description: Se va adauga un nou produs cu posibilitatea de a selecta alimentele extra
+        
+      operationId: addProdus
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: campurile SQL  vor fi adaugate prin format JSON
+          required: true
+          schema:
+            $ref: '#/definitions/Produs'
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - restaurant:
+            - 'write:id_restaurant'
+            -  'read:password_restaurant'
+    put:
+      tags:
+        - '/produse/{id_produs}'
+      summary: Update an existing product
+      description: identified by id_produs
+      operationId: updateProdus
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Product object that needs to be updated to the store
+          required: true
+          schema:
+            $ref: '#/definitions/Produs'
+      responses:
+        '200':
+          description: Product updated
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+        '405':
+          description: Validation exception
+      security:
+        - restaurant:
+            - 'write:id_restaurant'
+            -  'read:password_restaurant'
+  /produs:
+    get:
+      tags:
+        - /produse
+      summary: 'Finds all Products '
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findProducts
+      produces:
+        - application/json
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: true
+          type: array
+          items:
+            type: string
+            enum:
+              - available
+              - pending
+              - sold
+            default: available
+          collectionFormat: multi
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Produs'
+        '400':
+          description: Invalid status value
+      security:
+        - restaurant:
+            - 'write:id_restaurant'
+            -  'read:password_restaurant'
+  '/produse/{id_produs}':
+    get:
+      tags:
+        - '/produse/{id_produs}'
+      summary: Find formula by ID
+      description: Returns a single formula
+      operationId: getFormulaId
+      produces:
+        - application/json
+      parameters:
+        - name: id_produs
+          in: path
+          description: ID of quest to return
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Produs'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+      security:
+        - api_key: []
+  /delete:
+    delete:
+      tags:
+        - '/produse/{id_produs}'
+      summary: Deletes a product
+      description: ''
+      operationId: deletePet
+      produces:
+        - application/json
+      parameters:
+        - name: api_key
+          in: header
+          required: false
+          type: string
+        - name: id_produs
+          in: path
+          description:  id_produs to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Formula not found
+      security:
+        - restaurant:
+            - 'write:id_restaurant'
+            - 'read:password_restaurant'
+securityDefinitions:
+  restaurant:
+    type: oauth2
+    authorizationUrl: 'http://myslim/plot'
+    flow: implicit
+    scopes:
+      'write:id_restaurant': modify products in your account
+      'read:password_restaurant': read your pass
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Category:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    xml:
+      name: Category
+  Tag:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    xml:
+      name: Tag
+  Produs:
+    type: object
+    required:
+      - name
+      - photoUrls
+    properties:
+      id_oras:
+        type: integer
+        format: int64
+      category:
+        $ref: '#/definitions/Category'
+      name:
+        type: string
+        example: doggie
+      photoUrls:
+        type: array
+        xml:
+          name: photoUrl
+          wrapped: true
+        items:
+          type: string
+      tags:
+        type: array
+        xml:
+          name: tag
+          wrapped: true
+        items:
+          $ref: '#/definitions/Tag'
+      status:
+        type: string
+        description: pet status in the store
+        enum:
+          - available
+          - pending
+          - sold
+    xml:
+      name: Produs
