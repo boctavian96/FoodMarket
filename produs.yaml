@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: ' o documentatie privind apalearea unor metode REST pentru un  site Food Market'
+  description: ' o documentatie privind apelarea unor metode REST pentru un  site Food Market'
   version: 1.0.0
   title: Imi e foame
   termsOfService: 'http://imiefoame.ro/terms/'
