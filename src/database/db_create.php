@@ -32,7 +32,7 @@ Class used for the database management
             $sql = "CREATE TABLE User(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, prenume VARCHAR(30) NOT NULL, adresa VARCHAR(60) NOT NULL, data_creare DATE, oras VARCHAR(30) NOT NULL, email VARCHAR(60) NOT NULL, password VARCHAR(60) NOT NULL ";
         }
         
-        public function createProductTable(){
+        public function createProduseTable(){
             $sql = "CREATE TABLE Produs(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, restaurant FOREIGN KEY REFERENCES Restaurant(id) , prenume VARCHAR(30) NOT NULL, adresa VARCHAR(60) NOT NULL, data_creare DATE, oras VARCHAR(30) NOT NULL, email VARCHAR(60) NOT NULL, password VARCHAR(60) NOT NULL ";
         }
         
@@ -40,8 +40,8 @@ Class used for the database management
             $sql = "CREATE TABLE Restaurant(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, nume VARCHAR(60) NOT NULL, adresa VARCHAR(60) NOT NULL, data_creare DATE, email VARCHAR(60) NOT NULL, password VARCHAR(60) NOT NULL ";
         }
         
-        public function createCommandTable(){
-            $sql = "CREATE TABLE Comanda(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, idProdus FOREIGN KEY REFERENCES Produs(id)";
+        public function createComandaTable(){
+            $sql = "CREATE TABLE Comanda(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, idProdus FOREIGN KEY REFERENCES Produs(id), data TIMESTAMP NOT NULL";
         }
         
         public function createStatisticsTable(){
