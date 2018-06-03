@@ -1,4 +1,10 @@
 <?php 
+
+/*
+Class used for password generation in the system
+@author = Octavian Bodnariu
+@date = 03.06.2018
+*/
 class passwordGenerator {
     public characters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
         
