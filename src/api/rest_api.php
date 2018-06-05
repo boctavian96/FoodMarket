@@ -1,12 +1,18 @@
 <?php
- 
+
+//Database info 
+$host = 'localhost';
+$user = 'user';
+$password = 'pass';
+$database = 'dbname';
+
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
  
 // connect to the mysql database
-$link = mysqli_connect('localhost', 'user', 'pass', 'dbname');
+$link = mysqli_connect($host, $user, $password, $database);
 mysqli_set_charset($link,'utf8');
  
 // retrieve the table and key from the path
