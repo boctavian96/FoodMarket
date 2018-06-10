@@ -47,19 +47,20 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-6 animate-box">
+					
 					<h3>Trimite-ne un mesaj</h3>
-					<form action="#">
+					<form method ="POST" action ='/FoodMarket/public/contactMsg'>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="name">Nume</label>
-								<input type="text" id="name" class="form-control" placeholder="Numele tau">
+								<input type="text" id="name" name="name" class="form-control" placeholder="Numele tau">
 							</div>
 							
 						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="email">Email</label>
-								<input type="text" id="email" class="form-control" placeholder="Adresa de email">
+								<input type="text" name = "email" id="email" class="form-control" placeholder="Adresa de email">
 							</div>
 						</div>
 						<div class="row form-group">

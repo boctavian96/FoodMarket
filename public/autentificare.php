@@ -1,3 +1,15 @@
+<?php
+	require_once("../src/fb-init.php");
+
+	if (isset($_SESSION['access_token'])) {
+		header('Location: myaccount.php');
+		exit();
+	}
+
+	$redirectURL = "http://localhost/FoodMarket/src/fb-callback.php";
+	$permissions = ['email'];
+	$loginURL = $helper->getLoginUrl($redirectURL, $permissions);
+?>
 <!DOCTYPE html>
 <html>
 <style>
@@ -115,6 +127,7 @@ hr {
 <h2>Modal Signup Form</h2>
 
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+<button onclick="window.location = '<?php echo $loginURL ?>';" style="width:auto;" >Facebook Login</button>
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>

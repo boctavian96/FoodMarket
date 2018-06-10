@@ -1,5 +1,6 @@
 <?php
   require('includes/header.php');
+  
 ?>
   <body>  
     <div class="gtco-loader"></div>
