@@ -1,5 +1,6 @@
 <?php
 
+require "DbConfig.php";
 
 class db_foodmarket{
 

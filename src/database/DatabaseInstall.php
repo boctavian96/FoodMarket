@@ -10,10 +10,10 @@ include "DatabaseCreate.php";
 
 class DatabaseInstall {
 
-    private $host = '127.0.0.1';
-    private $database_name = 'foodmarket';
-    private $database_user = 'pma';
-    private $database_pass = 'pass';
+    private $host = "localhost";
+    private $database_name = "blackbyt_foodmarket";
+    private $database_user = "blackbyt_admin";
+    private $database_pass = "cB(ONHHCMfnf";
 
     private $db_create;
     
