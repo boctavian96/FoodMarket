@@ -20,7 +20,7 @@ class db_foodmarket{
 
 	// conect
 	public function connect(){
-		$mysql_connect_str='mysql:host=127.0.0.1;dbname=foodmarket';
+		$mysql_connect_str='mysql:host=localhost:3306;dbname=blackbyt_foodmarket';
 		$dbConnection = new PDO($mysql_connect_str, $this->dbuser, $this->dbpass); //array(PDO::ATTR_PERSISTENT => true));
                 //$dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 echo " DB conected";
