@@ -1,5 +1,16 @@
 <?php
   require('includes/header.php');
+
+	require_once("../src/fb-init.php");
+
+	if (isset($_SESSION['access_token'])) {
+		header('Location: myaccount.php');
+		exit();
+	}
+
+	$redirectURL = "http://localhost/FoodMarket2/src/fb-callback.php";
+	$permissions = ['email'];
+	$loginURL = $helper->getLoginUrl($redirectURL, $permissions);
 ?>
   <body>  
     <div class="gtco-loader"></div>
@@ -25,8 +36,8 @@
                           <div class="col-md-12">
                             Conectare via
                             <div class="social-buttons">
-                              <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                              <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                              <button onclick="window.location.href = '<?php echo $loginURL ?>';" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                           
                             </div>
                               sau
                              <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
