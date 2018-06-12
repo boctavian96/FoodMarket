@@ -1,5 +1,16 @@
 <?php
   require('includes/header.php');
+
+	require_once("../src/fb-init.php");
+
+	if (isset($_SESSION['access_token'])) {
+		header('Location: myaccount.php');
+		exit();
+	}
+
+	$redirectURL = "http://localhost/FoodMarket/src/fb-callback.php";
+	$permissions = ['email'];
+	$loginURL = $helper->getLoginUrl($redirectURL, $permissions);
 ?>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -55,7 +66,7 @@
               <div class="col-md-12">
                 Login via
                 <div class="social-buttons">
-                  <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                  <a href="window.location = '<?php echo $loginURL ?>';" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
                   <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                 </div>
                                 or
